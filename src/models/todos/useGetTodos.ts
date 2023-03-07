@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 
-const GET_TODOS = gql(`
+const GET_TODOS = gql`
     query GetTodos($options: PageQueryOptions) {
         todos(options: $options) {
             data {
@@ -13,7 +13,7 @@ const GET_TODOS = gql(`
             }
         }
     }
-`);
+`;
 
 const useGetTodos = () => {
     const result = useQuery(GET_TODOS);
