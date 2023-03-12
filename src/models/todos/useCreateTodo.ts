@@ -4,33 +4,63 @@ const CREATE_TODO = gql`
     mutation CreateTodo($input: TodoInput) {
         todo(input: $input) {
             id
-            todo
+            title
+            description
             image
+            isCompleted
+            tag
         }
     }
 `;
 
 type DataType = {
     todo: {
-        id: number;
-        todo: string;
+        id: string;
+        title: string;
+        description: string;
         image: string;
+        isCompleted: boolean;
+        tag: string;
     };
 };
 
 type VariablesType = {
     input: {
-        todo: string;
+        title: string;
+        description: string;
         image: string;
     };
 };
 
 const useCreateTodo = () => {
     const result = useMutation<DataType, VariablesType>(CREATE_TODO, {
-        onCompleted({ todo }) {
-            const todoList = JSON.parse(localStorage.getItem('todo') || '[]');
-            const newList = [...todoList, todo];
-            localStorage.setItem('todo', JSON.stringify(newList));
+        update(cache, { data }) {
+            cache.modify({
+                fields: {
+                    todoList(existingTodos = []) {
+                        const newTodoRef = cache.writeFragment({
+                            data: data?.todo,
+                            fragment: gql`
+                                fragment NewTodo on Todo {
+                                    id
+                                    title
+                                    description
+                                    image
+                                    isCompleted
+                                    tag
+                                }
+                            `
+                        });
+
+                        return {
+                            ...existingTodos,
+                            ...{
+                                data: [...existingTodos.data, newTodoRef]
+                            }
+                        };
+                    }
+                }
+            });
         }
     });
 
