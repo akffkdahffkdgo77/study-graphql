@@ -1,24 +1,36 @@
 import { gql, useQuery } from '@apollo/client';
 
-const GET_TODOS = gql`
+export const GET_TODOS = gql`
     query GetTodos($options: PageQueryOptions) {
-        todos(options: $options) {
+        todoList(options: $options) {
             data {
                 id
                 title
                 description
+                image
+                tag
             }
-            meta {
-                totalCount
-            }
+            totalCount
         }
     }
 `;
 
-const useGetTodos = () => {
-    const result = useQuery(GET_TODOS);
+export type DataType = {
+    todoList: {
+        data: {
+            id: number;
+            title: string;
+            description: string;
+            image: string;
+            isCompleted: boolean;
+            tag: string;
+        }[];
+        totalCount: number;
+    };
+};
 
-    return result;
+const useGetTodos = () => {
+    return useQuery<DataType>(GET_TODOS);
 };
 
 export default useGetTodos;
