@@ -2,19 +2,19 @@
 
 React-GraphQL를 공부하기 위한 레포지토리입니다.
 
--   [ ] useQuery
--   [ ] useMutation
+-   [x] useQuery
+-   [x] useMutation
 
 ## TodoList
 
--   [ ] Mock Get
--   [ ] Mock Post
+-   [x] Mock Get
+-   [x] Mock Post
 -   [ ] Mock Update
 -   [ ] Mock Delete
 
 ## UI
 
--   [ ] App Like Design
+-   [x] App Like Design
 -   [ ] Dialog
 -   [ ] TextField
 
