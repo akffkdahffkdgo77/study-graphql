@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { CalendarDaysIcon, CheckCircleIcon, MoonIcon, PlusCircleIcon, PlusIcon, StopCircleIcon, SunIcon } from '@heroicons/react/24/outline';
 import { createPortal } from 'react-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 import { NoImage } from 'assets/icons';
 import { useCreateTodo, useGetTodos } from 'models/todos';
@@ -10,11 +9,15 @@ import { useCreateTodo, useGetTodos } from 'models/todos';
 export default function Home() {
     const { loading, error, data } = useGetTodos();
     const [createTodo] = useCreateTodo();
+
     const [isOpen, setIsOpen] = useState(false);
+    const [isLightMode, setIsLightMode] = useState(localStorage.theme === 'light');
 
     const [todo, setTodo] = useState('');
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [tags, setTags] = useState<string[]>([]);
+
     const [preview, setPreview] = useState('');
-    const [isLightMode, setIsLightMode] = useState(localStorage.theme === 'light');
 
     useEffect(() => {
         if (isLightMode) {
@@ -38,6 +41,14 @@ export default function Home() {
         }
     };
 
+    const handleTag = () => {
+        if (inputRef.current) {
+            const newValue = inputRef.current.value;
+            setTags((prev) => [...prev, newValue || '']);
+            inputRef.current.value = '';
+        }
+    };
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         createTodo({
@@ -45,23 +56,15 @@ export default function Home() {
                 input: {
                     title: 'GraphQL 공부하기',
                     description: todo,
-                    image: preview
-                }
-            },
-            optimisticResponse: {
-                todo: {
-                    id: uuidv4(),
-                    title: 'GraphQL 공부하기',
-                    description: todo,
                     image: preview,
-                    isCompleted: false,
-                    tag: 'GraphQL'
+                    tag: tags.join(',')
                 }
             }
         });
         setIsOpen(false);
         setTodo('');
         setPreview('');
+        setTags([]);
     };
 
     if (loading)
@@ -96,13 +99,13 @@ export default function Home() {
                     {isOpen &&
                         createPortal(
                             <div role="dialog" aria-modal="true" className="fixed top-0 right-0 left-0 bottom-0 [background:rgba(0,0,0,0.5)] flex items-center justify-center">
-                                <div className="rounded-md bg-white h-full max-h-[450px] max-w-[360px] w-full flex items-center justify-start flex-col">
+                                <div className="rounded-md bg-white dark:bg-slate-900 dark:text-slate-50 min-h-[500px] max-w-[360px] w-full flex items-center justify-start flex-col">
                                     <h2 className="font-bold text-lg text-left w-full p-2.5 italic flex items-center gap-1">
                                         <CalendarDaysIcon className="w-6 h-6 text-pink-500" />
                                         What is your plan?
                                     </h2>
-                                    <hr className="border border-slate-100 mb-7 w-full" />
-                                    <form onSubmit={handleSubmit} className="w-full overflow-hidden border border-900 rounded-md max-w-[300px]" autoComplete="off">
+                                    <hr className="border border-slate-100 dark:border-slate-300 mb-7 w-full" />
+                                    <form onSubmit={handleSubmit} className="w-full overflow-hidden border border-900 rounded-md max-w-[300px]" autoComplete="off" noValidate>
                                         <label className="w-full h-[300px] flex items-center justify-center border-b border-dashed border-slate-300" htmlFor="file">
                                             {preview ? (
                                                 <img width="100%" height="100%" src={preview} alt="todo preview" className="h-full" />
@@ -118,11 +121,39 @@ export default function Home() {
                                             <input
                                                 id="todo"
                                                 type="text"
+                                                required
                                                 value={todo}
                                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTodo(e.currentTarget.value)}
-                                                className="flex-1 outline-none p-2.5 font-medium text-xs"
+                                                className="flex-1 outline-none p-2.5 font-medium text-xs dark:bg-slate-900 dark:text-slate-50"
                                             />
                                         </label>
+                                    </form>
+                                    <form onSubmit={(e) => e.preventDefault()} className="mt-2.5 mb-7 w-full overflow-hidden border border-900 rounded-md max-w-[300px]" autoComplete="off">
+                                        <label className="flex items-center gap-2.5 ml-2.5" htmlFor="tag">
+                                            <span className="text-[8px] ml-[2px] font-bold border-[1.5px] rounded-full flex items-center justify-center border-pink-500 text-pink-500 w-[20px] h-[20px] animate-pulse">
+                                                #
+                                            </span>
+                                            <input id="tag" type="text" ref={inputRef} className="flex-1 outline-none rounded-md font-medium p-2.5 text-xs dark:bg-slate-900 dark:text-slate-50" />
+                                            <button
+                                                className="p-1 text-xs rounded-md mr-2.5 bg-slate-900 text-slate-50 dark:bg-slate-50 dark:text-slate-900 font-bold"
+                                                type="button"
+                                                onClick={handleTag}
+                                            >
+                                                추가
+                                            </button>
+                                        </label>
+                                        {Boolean(todo.length) && Boolean(tags.length) && (
+                                            <div className="flex items-center gap-2.5 m-2.5">
+                                                {tags.map((tag) => (
+                                                    <span
+                                                        key={tag}
+                                                        className="px-2.5 py-1 rounded-md bg-slate-900 text-white text-xs dark:bg-slate-300 dark:border-slate-900 dark:border dark:text-slate-900"
+                                                    >
+                                                        #{tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
                                     </form>
                                 </div>
                             </div>,

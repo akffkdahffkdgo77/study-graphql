@@ -8,7 +8,7 @@ const handlers = [
         return res(ctx.data(todoList));
     }),
     graphql.mutation('CreateTodo', (req, res, ctx) => {
-        const { title, description, image } = req.variables.input;
+        const { title, description, image, tag } = req.variables.input;
         return res(
             ctx.data({
                 todo: {
@@ -18,7 +18,7 @@ const handlers = [
                     description,
                     image,
                     isCompleted: false,
-                    tag: 'GraphQL'
+                    tag
                 }
             })
         );
