@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { CalendarDaysIcon, CheckCircleIcon, MoonIcon, PlusCircleIcon, PlusIcon, StopCircleIcon, SunIcon } from '@heroicons/react/24/outline';
+import { CalendarDaysIcon, CheckCircleIcon, MoonIcon, PlusCircleIcon, PlusIcon, PlusSmallIcon, StopCircleIcon, SunIcon } from '@heroicons/react/24/outline';
 import { createPortal } from 'react-dom';
 
 import { NoImage } from 'assets/icons';
@@ -139,7 +139,7 @@ export default function Home() {
                                                 type="button"
                                                 onClick={handleTag}
                                             >
-                                                추가
+                                                <PlusSmallIcon className="w-3 h-3" />
                                             </button>
                                         </label>
                                         {Boolean(todo.length) && Boolean(tags.length) && (
