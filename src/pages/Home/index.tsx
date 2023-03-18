@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { CalendarDaysIcon, CheckCircleIcon, MoonIcon, PlusCircleIcon, PlusIcon, PlusSmallIcon, StopCircleIcon, SunIcon } from '@heroicons/react/24/outline';
+import { CalendarDaysIcon, CheckCircleIcon, MoonIcon, PencilIcon, PlusCircleIcon, PlusIcon, PlusSmallIcon, StopCircleIcon, SunIcon } from '@heroicons/react/24/outline';
 import { createPortal } from 'react-dom';
 
 import { NoImage } from 'assets/icons';
@@ -162,7 +162,10 @@ export default function Home() {
                     {data?.todoList?.totalCount ? (
                         <ul className="list-none">
                             {data?.todoList?.data?.map((d) => (
-                                <li key={d?.id} className="text-lg border bg-slate-100 border-slate-900 rounded-md p-5 mb-2.5 dark:border-slate-50 dark:bg-slate-300">
+                                <li key={d?.id} className="relative text-lg border bg-slate-100 border-slate-900 rounded-md p-5 mb-2.5 dark:border-slate-50 dark:bg-slate-300">
+                                    <button type="button" className="absolute top-[5px] right-[5px]">
+                                        <PencilIcon className="w-3 h-3" />
+                                    </button>
                                     <img width="100%" height={300} src={d.image} alt={d.title} className="rounded-md" />
                                     <h2 className="font-semibold text-lg mt-2.5 flex items-center gap-1">
                                         <button type="button">{!d.isCompleted ? <StopCircleIcon className="w-6 h-6 text-red-600" /> : <CheckCircleIcon className="w-6 h-6 text-green-600" />}</button>
