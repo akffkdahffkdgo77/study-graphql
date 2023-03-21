@@ -52,6 +52,11 @@ module.exports = {
                         position: 'before'
                     },
                     {
+                        pattern: 'lib/**/*',
+                        group: 'internal',
+                        position: 'before'
+                    },
+                    {
                         pattern: '*.+(css|scss)',
                         patternOptions: {
                             dot: true,
