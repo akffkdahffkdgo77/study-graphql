@@ -1,9 +1,28 @@
 # My Pokemon
 
-React-GraphQL를 공부하기 위한 레포지토리입니다.
+Apollo Client & GraphQL
 
 -   [x] useQuery
 -   [x] useMutation
+-   [x] Authentication
+
+State Management
+
+-   [x] zustand
+
+## Folder Structure
+
+```
+-- assets       # images, icons
+-- components   # reusable components
+-- features     # feature related components (e.g. TodoList)
+-- hooks        # custom hook
+-- lib          # configs/files related to external library
+-- mocks        # msw
+-- models       # api custom hook (useQuery, useMutation)
+-- pages        # page
+-- routes       # routers
+```
 
 ## TodoList
 
@@ -11,6 +30,8 @@ React-GraphQL를 공부하기 위한 레포지토리입니다.
 -   [x] Mock Post
 -   [ ] Mock Update
 -   [ ] Mock Delete
+-   [ ] Mock Unauthorized Error (UNAUTHENTICATED)
+-   [ ] Mock Bad User Input Error
 
 ## UI
 
