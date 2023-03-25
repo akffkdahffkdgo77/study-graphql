@@ -4,6 +4,10 @@ Apollo Client & GraphQL
 
 -   [x] useQuery
 -   [x] useMutation
+-   [x] cache
+    -   [x] readQuery
+    -   [x] updateQuery
+    -   [x] modify
 -   [x] Authentication
 
 State Management
