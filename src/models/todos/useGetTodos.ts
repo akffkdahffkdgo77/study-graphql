@@ -15,16 +15,18 @@ export const GET_TODOS = gql`
     }
 `;
 
+export type TodoItemType = {
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    isCompleted: boolean;
+    tag: string;
+};
+
 export type DataType = {
     todoList: {
-        data: {
-            id: number;
-            title: string;
-            description: string;
-            image: string;
-            isCompleted: boolean;
-            tag: string;
-        }[];
+        data: TodoItemType[];
         totalCount: number;
     };
 };
