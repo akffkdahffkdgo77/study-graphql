@@ -4,6 +4,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { todoList } from 'mocks/api/data/todos';
 
 const handlers = [
+    graphql.query('TokenTest', (req, res, ctx) => {
+        return res(ctx.errors([{ extensions: { code: 'UNAUTHENTICATED' }, message: 'Unauthorized' }]));
+    }),
     graphql.query('GetTodos', (req, res, ctx) => {
         return res(ctx.data(todoList));
     }),

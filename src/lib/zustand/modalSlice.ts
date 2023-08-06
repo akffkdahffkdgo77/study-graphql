@@ -13,19 +13,7 @@ export const createModalSlice: StateCreator<ModalSlice> = (set) => ({
     isOpen: false,
     isEditOpen: false,
     editableData: null,
-    openUpload: () =>
-        set((state) => ({
-            isOpen: !state.isOpen
-        })),
-    openEdit: (data) =>
-        set(() => ({
-            editableData: data,
-            isEditOpen: true
-        })),
-    close: () =>
-        set(() => ({
-            isOpen: false,
-            isEditOpen: false,
-            editableData: null
-        }))
+    openUpload: () => set((state) => ({ isOpen: !state.isOpen })),
+    openEdit: (data) => set(() => ({ editableData: data, isEditOpen: true })),
+    close: () => set(() => ({ isOpen: false, isEditOpen: false, editableData: null }))
 });

@@ -1,11 +1,13 @@
-import React from 'react';
-
 import { createPortal } from 'react-dom';
 
-export default function Modal({ children }: { children: React.ReactNode }) {
+type ModalType = {
+    children: React.ReactNode;
+};
+
+export default function Modal({ children }: ModalType) {
     return createPortal(
-        <div role="dialog" aria-modal="true" className="fixed top-0 right-0 left-0 bottom-0 [background:rgba(0,0,0,0.5)] z-[10000] flex items-center justify-center">
-            <div className="rounded-md bg-white dark:bg-slate-900 dark:text-slate-50 min-h-[250px] max-h-full max-w-[360px] w-full flex items-center justify-start flex-col">{children}</div>
+        <div role="dialog" aria-modal="true" className="fixed bottom-0 left-0 right-0 top-0 z-[10000] flex items-center justify-center bg-black/50">
+            <div className="flex max-h-full min-h-[250px] w-full max-w-[360px] flex-col items-center justify-start rounded-md bg-white dark:bg-slate-900 dark:text-slate-50">{children}</div>
         </div>,
         document.getElementById('root') as Element
     );

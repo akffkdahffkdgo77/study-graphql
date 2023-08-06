@@ -37,6 +37,7 @@ module.exports = {
         }
     },
     rules: {
+        'prettier/prettier': 'off',
         'import/no-extraneous-dependencies': 'off',
         'import/prefer-default-export': 'off',
         'react/jsx-filename-extension': ['warn', { extensions: ['.ts', '.tsx'] }],
@@ -47,17 +48,25 @@ module.exports = {
                 groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index', 'object', 'type'],
                 pathGroups: [
                     {
-                        pattern: 'react',
+                        pattern: '{react*,react*/**}',
                         group: 'external',
                         position: 'before'
                     },
                     {
-                        pattern: 'lib/**/*',
+                        // components
+                        pattern: 'components/**',
                         group: 'internal',
                         position: 'before'
                     },
                     {
-                        pattern: '*.+(css|scss)',
+                        // utils
+                        pattern: '{@apollo/**,lib/**/*,mocks/**,models/**}',
+                        group: 'internal',
+                        position: 'after'
+                    },
+                    {
+                        // style-related
+                        pattern: '{assets/**,@heroicons/**,styles/**,*.+(css|scss)}',
                         patternOptions: {
                             dot: true,
                             nocomment: true,

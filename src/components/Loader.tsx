@@ -1,6 +1,6 @@
 export default function Loader() {
     return (
-        <div className="font-mono min-h-screen max-w-full flex items-center justify-center text-slate-900 dark:text-slate-50">
+        <div className="flex min-h-screen max-w-full items-center justify-center font-mono text-slate-900 dark:text-slate-50">
             <p>Loading...</p>
         </div>
     );

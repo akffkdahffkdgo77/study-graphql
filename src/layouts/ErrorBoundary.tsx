@@ -1,8 +1,15 @@
 import { Component, ErrorInfo } from 'react';
 
-import Error from 'features/Error/ErrorMessage';
+import Error from './ErrorMessage';
 
-import type { Props, State } from 'features/Error/ErrorBoundary.types';
+type Props = {
+    children: React.ReactNode;
+};
+
+type State = {
+    hasError: boolean;
+    error: Error | null;
+};
 
 const INITIAL_STATE = { hasError: false, error: null };
 
