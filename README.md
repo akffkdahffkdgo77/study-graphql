@@ -1,4 +1,4 @@
-# My Pokemon
+# Study GraphQL
 
 Apollo Client & GraphQL
 
