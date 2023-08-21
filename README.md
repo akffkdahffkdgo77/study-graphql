@@ -1,34 +1,14 @@
 # Study GraphQL
 
-Apollo Client & GraphQL
+프로젝트에서 GraphQL을 사용하기 위한 스터디 결과물
 
--   [x] useQuery
--   [x] useMutation
--   [x] cache
-    -   [x] readQuery
-    -   [x] updateQuery
-    -   [x] modify
--   [x] Authentication
+## TIL
 
-State Management
+### useQuery
 
--   [x] zustand
+### useMutation
 
-## TodoList
-
--   [x] Mock Get
--   [x] Mock Post
--   [ ] Mock Update
--   [ ] Mock Delete
--   [ ] Mock Unauthorized Error (UNAUTHENTICATED)
--   [ ] Mock Bad User Input Error
-
-## UI
-
--   [x] Dark Mode / Light Mode
--   [x] App Like Design
--   [ ] Dialog
--   [ ] TextField
+### Authentication
 
 ## Resources
 
