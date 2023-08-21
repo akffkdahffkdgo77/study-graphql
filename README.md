@@ -14,20 +14,6 @@ State Management
 
 -   [x] zustand
 
-## Folder Structure
-
-```
--- assets       # images, icons
--- components   # reusable components
--- features     # feature related components (e.g. TodoList)
--- hooks        # custom hook
--- lib          # configs/files related to external library
--- mocks        # msw
--- models       # api custom hook (useQuery, useMutation)
--- pages        # page
--- routes       # routers
-```
-
 ## TodoList
 
 -   [x] Mock Get
