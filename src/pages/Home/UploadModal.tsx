@@ -18,7 +18,7 @@ export default function UploadModal() {
                     title: 'GraphQL 공부하기',
                     description: todo,
                     image: preview,
-                    tag: ''
+                    tag: 'GraphQL,Study'
                 }
             }
         });
