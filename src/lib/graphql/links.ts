@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createHttpLink, fromPromise, gql } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
@@ -43,8 +42,6 @@ const resolvePendingRequests = () => {
 export const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
         if (client && graphQLErrors[0].extensions.code === 'UNAUTHENTICATED') {
-            // eslint-disable-next-line no-console
-            console.log('if unauthenticated');
             // error code is set to UNAUTHENTICATED
             // when AuthenticationError thrown in resolver
             let forward$;
@@ -54,8 +51,9 @@ export const errorLink = onError(({ graphQLErrors, networkError, operation, forw
                 forward$ = fromPromise(
                     client
                         .mutate({ mutation: REFRESH_TOKEN })
-                        .then(({ refreshToken }: any) => {
+                        .then(({ data: { refreshToken } }) => {
                             // Store the new tokens for your auth link
+                            localStorage.setItem('token', refreshToken.accessToken);
                             resolvePendingRequests();
                             return refreshToken;
                         })
