@@ -1,5 +1,6 @@
 <img src="https://capsule-render.vercel.app/api?section=header&type=waving&height=300&text=Study%20GraphQL&color=gradient&fontSize=90&animation=fadeIn" alt="" />
 
+![Create React App](https://img.shields.io/badge/create_react_app-303846?style=for-the-badge&logo=createreactapp&logoColor=09D3AC)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)
